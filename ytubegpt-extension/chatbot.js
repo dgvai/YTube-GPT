@@ -85,22 +85,25 @@ const getVideoTranscript = async (videoId) => {
   return data;
 };
 
+const insertTemplate = () => {
+  document.getElementById("secondary").insertAdjacentHTML("afterbegin", template);
+};
+
 async function main() {
   const videoId = getVideoIdFromQuery();
   const transcript = await getVideoTranscript(videoId);
-  console.log(transcript);
+
+  insertTemplate();
+  const form = document.getElementById("ytube-gpt-form");
+  const inputField = document.getElementById("ytube-gpt-msg");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    inputField.value;
+    const userText = makeUserText(inputField.value);
+    insertIntoChatbox(userText);
+    inputField.value = "";
+  });
 }
 
 main();
-
-document.getElementById("secondary").insertAdjacentHTML("afterbegin", template);
-const form = document.getElementById("ytube-gpt-form");
-const inputField = document.getElementById("ytube-gpt-msg");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  inputField.value;
-  const userText = makeUserText(inputField.value);
-  insertIntoChatbox(userText);
-  inputField.value = "";
-});
