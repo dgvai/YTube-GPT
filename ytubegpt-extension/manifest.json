@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "YTube GPT",
+  "description": "Your personal YouTube assistant",
+  "version": "1.0",
+  "permissions": ["activeTab", "scripting", "webRequest"],
+  "host_permissions": ["*://localhost:*/*"],
+  "action": {},
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": ["twcss.js"],
+      "matches": ["https://*.youtube.com/watch*"]
+    }
+  ]
+}
