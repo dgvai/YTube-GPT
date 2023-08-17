@@ -72,6 +72,13 @@
   margin: 0 3px;
 }
 
+.avatar-bot {
+  border-radius: 9999px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 3px;
+}
+
 .bot-text-bg {
   padding: 0.75rem;
   border-top-right-radius: 0.5rem;

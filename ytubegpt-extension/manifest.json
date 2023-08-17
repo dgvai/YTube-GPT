@@ -4,7 +4,7 @@
   "description": "Your personal YouTube assistant",
   "version": "1.0",
   "permissions": ["activeTab", "scripting", "webRequest"],
-  "host_permissions": ["*://localhost:*/*"],
+  "host_permissions": ["*://localhost:*/*", "https://i.ibb.co/*"],
   "action": {},
   "background": {
     "service_worker": "src/service-worker.js",
