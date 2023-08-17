@@ -119,17 +119,19 @@ const initMessages = (transcript) => {
   ];
 };
 
-chrome.runtime.onMessage.addListener(async function (request) {
-  if (request.urlChanged) {
-    const newTranscript = await getVideoTranscript();
+const initTranscript = async () => {
+  const transcript = await getVideoTranscript();
 
-    if (!newTranscript) {
-      disableInputField(document.getElementById("ytube-gpt-msg"), "No transcript available!");
-    } else {
-      enableInputField(document.getElementById("ytube-gpt-msg"), "Type your message…");
-      initMessages(newTranscript);
-    }
+  if (!transcript) {
+    disableInputField(document.getElementById("ytube-gpt-msg"), "No transcript available!");
+  } else {
+    enableInputField(document.getElementById("ytube-gpt-msg"), "Type your message…");
+    initMessages(transcript);
   }
+};
+
+chrome.runtime.onMessage.addListener(async function (request) {
+  if (request.urlChanged) await initTranscript();
 });
 
 async function main() {
@@ -137,15 +139,7 @@ async function main() {
   const form = document.getElementById("ytube-gpt-form");
   const inputField = document.getElementById("ytube-gpt-msg");
 
-  const transcript = await getVideoTranscript();
-
-  if (!transcript) {
-    disableInputField(inputField, "No transcript available!");
-  } else {
-    enableInputField(inputField, "Type your message…");
-    initMessages(transcript);
-    inputField.focus();
-  }
+  await initTranscript();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
