@@ -88,6 +88,7 @@ const getVideoTranscript = async () => {
 
 const insertTemplate = () => {
   document.getElementById("secondary").insertAdjacentHTML("afterbegin", template);
+  console.log("YTube GPT is Ready in Client!");
 };
 
 const triggerLoader = (show) => {
@@ -98,12 +99,14 @@ const triggerLoader = (show) => {
   }
 };
 
-const disableInputField = (element, message) => {
+const disableInputField = (message) => {
+  const element = document.getElementById("ytube-gpt-msg");
   element.setAttribute("disabled", true);
   element.setAttribute("placeholder", message);
 };
 
-const enableInputField = (element, message) => {
+const enableInputField = (message) => {
+  const element = document.getElementById("ytube-gpt-msg");
   element.removeAttribute("disabled");
   element.setAttribute("placeholder", message);
 };
@@ -123,9 +126,9 @@ const initTranscript = async () => {
   const transcript = await getVideoTranscript();
 
   if (!transcript) {
-    disableInputField(document.getElementById("ytube-gpt-msg"), "No transcript available!");
+    disableInputField("No transcript available!");
   } else {
-    enableInputField(document.getElementById("ytube-gpt-msg"), "Type your message…");
+    enableInputField("Type your message…");
     initMessages(transcript);
   }
 };
@@ -140,6 +143,7 @@ async function main() {
   const inputField = document.getElementById("ytube-gpt-msg");
 
   await initTranscript();
+  inputField.focus();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -165,6 +169,11 @@ async function main() {
       body: JSON.stringify(messages),
     });
 
+    if (response.status === 500) {
+      disableInputField("Something went wrong!");
+      triggerLoader(false);
+      return;
+    }
     const reply = await response.json();
     messages.push(reply);
 
