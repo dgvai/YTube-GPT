@@ -41,9 +41,11 @@ OPENAI_API_KEY=<YOUR-KEY-HERE>
 - Run `yarn start:dev` or `npm run start:dev`
 
 ### 6. Usage
-- Go to your favorite YouTube video and click the extension icon
-- Start asking questions and enjoy the responses!
+- Go to any YouTube video and see if that video has a transcript
+- If it does, ask in the chat box and see the response!
+
+> why no all videos has transcript? Ans: YouTube does not provide transcripts for all videos. It depends on the uploader. It also varies by language, type of video, and other factors.
 
 ## Screenshots
-![Screenshot 1](./docs/screenshot.png)
-![Screenshot 2](./docs/screenshot-2.png)
+![Screenshot 1](./docs/screenshot-full.png)
+![Screenshot 2](./docs/screenshot-component.png)

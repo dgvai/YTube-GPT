@@ -9,7 +9,7 @@ const template = `
     <div id="ytube-gtp-chatbox" class="messages-container"></div>
     <div class="input-container">
       <form id="ytube-gpt-form" class="form-container">
-        <input id="ytube-gpt-msg" class="user-input" type="text" placeholder="Type your message…" />
+        <input id="ytube-gpt-msg" class="user-input" type="text" autocomplete="off" placeholder="Type your message…" />
       </form>
     </div>
   </div>
