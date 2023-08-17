@@ -27,11 +27,22 @@
   flex-direction: column;
   flex-grow: 1;
   height: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.messages-container::-webkit-scrollbar {
+  display: none;
 }
 
 .input-container {
-  padding: 1rem;
   background-color: #d1d5db;
+  display: flex;
+}
+
+.form-container {
+  display: flex;
+  width: 100%;
 }
 
 .user-input {
@@ -41,6 +52,7 @@
   align-items: center;
   border-radius: 0.25rem;
   width: 100%;
+  margin: 5px;
   height: 2.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -48,11 +60,8 @@
 
 .bot-text-container {
   display: flex;
-  margin-top: 0.5rem;
-  margin-left: 0.75rem;
-  margin-left: 0.875rem;
   width: 100%;
-  max-width: 20rem;
+  margin-bottom: 5px;
 }
 
 .avatar {
@@ -60,6 +69,7 @@
   width: 2.5rem;
   height: 2.5rem;
   background-color: #d1d5db;
+  margin: 0 3px;
 }
 
 .bot-text-bg {
@@ -68,6 +78,7 @@
   border-bottom-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   background-color: #d1d5db;
+  max-width: 18rem;
 }
 
 .chat-text {
@@ -77,12 +88,9 @@
 
 .user-text-container {
   display: flex;
-  margin-top: 0.5rem;
-  margin-left: 0.75rem;
-  margin-left: 0.875rem;
   justify-content: flex-end;
   width: 100%;
-  max-width: 20rem;
+  margin-bottom: 5px;
 }
 
 .user-text-bg {
@@ -92,4 +100,5 @@
   border-bottom-right-radius: 0.5rem;
   color: #ffffff;
   background-color: #2563eb;
+  max-width: 18rem;
 }

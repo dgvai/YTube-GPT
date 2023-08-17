@@ -5,7 +5,7 @@ const template = `
   <div class="chatbox-container">
     <div id="ytube-gtp-chatbox" class="messages-container"></div>
     <div class="input-container">
-      <form id="ytube-gpt-form">
+      <form id="ytube-gpt-form" class="form-container">
         <input id="ytube-gpt-msg" class="user-input" type="text" placeholder="Type your message…" />
       </form>
     </div>
