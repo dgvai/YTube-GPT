@@ -18,7 +18,7 @@ const loader = `<div class="loader"><span></span><span></span><span></span></div
 const makeBotText = (text) => {
   return `
   <div class="bot-text-container">
-    <img src="https://i.ibb.co/njCNCh7/DON-1.png" class="avatar-bot"/>
+    <img src="https://i.ibb.co/njCNCh7/DON-1.png" class="avatar"/>
     <div>
       <div class="bot-text-bg">
         <p class="chat-text">${text}</p>
