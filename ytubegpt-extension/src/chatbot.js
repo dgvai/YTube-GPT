@@ -111,14 +111,19 @@ async function main() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    inputField.value;
-    const userText = makeUserText(inputField.value);
+    const trimmedInput = inputField.value.trim();
+    if (trimmedInput === "") return;
+
     messages.push({
       role: "user",
-      content: inputField.value,
+      content: trimmedInput,
     });
+
+    const userText = makeUserText(trimmedInput);
     insertIntoChatbox(userText);
+
     inputField.value = "";
+
     triggerLoader(true);
     const response = await fetchResource(`${API_SERVER}/gpt/chat`, {
       method: "POST",
@@ -129,10 +134,11 @@ async function main() {
     });
 
     const reply = await response.json();
-    const botText = makeBotText(reply.content);
     messages.push(reply);
-    triggerLoader(false);
+
+    const botText = makeBotText(reply.content);
     insertIntoChatbox(botText);
+    triggerLoader(false);
   });
 }
 
