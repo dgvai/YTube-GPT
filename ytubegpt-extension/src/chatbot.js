@@ -107,6 +107,7 @@ async function main() {
   insertTemplate();
   const form = document.getElementById("ytube-gpt-form");
   const inputField = document.getElementById("ytube-gpt-msg");
+  inputField.focus();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
