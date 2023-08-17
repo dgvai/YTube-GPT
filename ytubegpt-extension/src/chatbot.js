@@ -95,14 +95,26 @@ const triggerLoader = (show) => {
 };
 
 async function main() {
-  const videoId = getVideoIdFromQuery();
-  const transcript = await getVideoTranscript(videoId);
-  const messages = [
+  let videoId = getVideoIdFromQuery();
+  let transcript = await getVideoTranscript(videoId);
+  let messages = [
     {
       role: "system",
       content: transcript,
     },
   ];
+
+  chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
+    if (request.urlChanged) {
+      const newTranscript = await getVideoTranscript(getVideoIdFromQuery());
+      messages = [
+        {
+          role: "system",
+          content: newTranscript,
+        },
+      ];
+    }
+  });
 
   insertTemplate();
   const form = document.getElementById("ytube-gpt-form");
