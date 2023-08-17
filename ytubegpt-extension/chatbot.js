@@ -92,17 +92,40 @@ const insertTemplate = () => {
 async function main() {
   const videoId = getVideoIdFromQuery();
   const transcript = await getVideoTranscript(videoId);
+  const messages = [
+    {
+      role: "system",
+      content: transcript,
+    },
+  ];
 
   insertTemplate();
   const form = document.getElementById("ytube-gpt-form");
   const inputField = document.getElementById("ytube-gpt-msg");
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     inputField.value;
     const userText = makeUserText(inputField.value);
+    messages.push({
+      role: "user",
+      content: inputField.value,
+    });
     insertIntoChatbox(userText);
     inputField.value = "";
+
+    const response = await fetchResource(`${API_SERVER}/gpt/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(messages),
+    });
+
+    const reply = await response.json();
+    const botText = makeBotText(reply.content);
+    messages.push(reply);
+    insertIntoChatbox(botText);
   });
 }
 
