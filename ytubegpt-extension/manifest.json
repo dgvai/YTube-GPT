@@ -7,12 +7,12 @@
   "host_permissions": ["*://localhost:*/*"],
   "action": {},
   "background": {
-    "service_worker": "service-worker.js",
+    "service_worker": "src/service-worker.js",
     "type": "module"
   },
   "content_scripts": [
     {
-      "css": ["styles.css"],
+      "css": ["src/styles.css"],
       "matches": ["https://*.youtube.com/watch*"]
     }
   ],

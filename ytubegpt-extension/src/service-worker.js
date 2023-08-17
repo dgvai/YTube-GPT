@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.scripting
       .executeScript({
         target: { tabId: tab.id },
-        files: ["chatbot.js"],
+        files: ["src/chatbot.js"],
       })
       .then(() => console.log("YTube GPT is Ready!"));
   });
