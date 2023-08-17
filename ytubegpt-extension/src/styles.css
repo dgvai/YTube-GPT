@@ -16,11 +16,16 @@
   overflow: hidden;
 }
 
+.yt-gpt-minimized {
+  height: 3rem;
+}
+
 .chatbox-header {
   color: #333333;
   display: flex;
   justify-content: space-around;
   padding: 10px;
+  width: 100%;
 }
 
 .chatbox-container {
@@ -44,6 +49,7 @@
   height: 0;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  justify-content: end;
 }
 
 .messages-container::-webkit-scrollbar {

@@ -1,8 +1,8 @@
 const API_SERVER = "http://localhost:3000";
 
 const template = `
-<main class="main-layout">
-  <div class="chatbox-header">
+<main id="ytube-gpt-main" class="main-layout">
+  <div id="ytube-gpt-header" class="chatbox-header">
     <bold>YTube GPT</bold>
   </div>
   <div class="chatbox-container">
@@ -115,6 +115,7 @@ const enableInputField = (message) => {
 };
 
 let messages = [];
+let windowMaximized = true;
 
 const initMessages = (transcript) => {
   messages = [
@@ -144,6 +145,7 @@ async function main() {
   insertTemplate();
   const form = document.getElementById("ytube-gpt-form");
   const inputField = document.getElementById("ytube-gpt-msg");
+  const header = document.getElementById("ytube-gpt-header");
 
   await initTranscript();
   inputField.focus();
@@ -183,6 +185,17 @@ async function main() {
     const botText = makeBotText(reply.content);
     insertIntoChatbox(botText);
     triggerLoader(false);
+  });
+
+  header.addEventListener("click", () => {
+    const main = document.getElementById("ytube-gpt-main");
+    if (windowMaximized) {
+      main.classList.add("yt-gpt-minimized");
+      windowMaximized = false;
+    } else {
+      main.classList.remove("yt-gpt-minimized");
+      windowMaximized = true;
+    }
   });
 }
 
