@@ -7,7 +7,11 @@ export class GptController {
   constructor(private readonly gptService: GptService) {}
 
   @Post('chat')
-  async getChatResponse(@Body('messages') messages: ChatMessage[]) {
+  async getChatResponse(@Body() messages: ChatMessage[]) {
+    console.log({
+      system_log: new Date().toISOString(),
+      messages,
+    });
     const response = await this.gptService.getChatResponse(messages);
     return response;
   }

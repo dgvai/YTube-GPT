@@ -13,8 +13,8 @@ export class GptService {
   }
 
   async getChatResponse(messages: ChatMessage[]) {
-    return await this.openai.createChatCompletion({
-      model: 'gpt-3.5-turbo-16k',
+    const response = await this.openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
       messages,
       temperature: 1,
       max_tokens: 256,
@@ -22,5 +22,7 @@ export class GptService {
       frequency_penalty: 0,
       presence_penalty: 0,
     });
+    const reply = await response.data;
+    return reply.choices[0].message;
   }
 }
