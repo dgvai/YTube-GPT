@@ -76,8 +76,12 @@ const insertIntoChatbox = (element) => {
   scrollToBottom();
 };
 
-const getVideoTranscript = async (videoId) => {
+const getVideoTranscript = async () => {
+  const videoId = getVideoIdFromQuery();
   const response = await fetchResource(`${API_SERVER}/youtube/caption/${videoId}`);
+
+  if (response.status !== 200) return false;
+
   const data = await response.text();
   return data;
 };
@@ -94,32 +98,54 @@ const triggerLoader = (show) => {
   }
 };
 
-async function main() {
-  let videoId = getVideoIdFromQuery();
-  let transcript = await getVideoTranscript(videoId);
-  let messages = [
+const disableInputField = (element, message) => {
+  element.setAttribute("disabled", true);
+  element.setAttribute("placeholder", message);
+};
+
+const enableInputField = (element, message) => {
+  element.removeAttribute("disabled");
+  element.setAttribute("placeholder", message);
+};
+
+let messages = [];
+
+const initMessages = (transcript) => {
+  messages = [
     {
       role: "system",
       content: transcript,
     },
   ];
+};
 
-  chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
-    if (request.urlChanged) {
-      const newTranscript = await getVideoTranscript(getVideoIdFromQuery());
-      messages = [
-        {
-          role: "system",
-          content: newTranscript,
-        },
-      ];
+chrome.runtime.onMessage.addListener(async function (request) {
+  if (request.urlChanged) {
+    const newTranscript = await getVideoTranscript();
+
+    if (!newTranscript) {
+      disableInputField(document.getElementById("ytube-gpt-msg"), "No transcript available!");
+    } else {
+      enableInputField(document.getElementById("ytube-gpt-msg"), "Type your message…");
+      initMessages(newTranscript);
     }
-  });
+  }
+});
 
+async function main() {
   insertTemplate();
   const form = document.getElementById("ytube-gpt-form");
   const inputField = document.getElementById("ytube-gpt-msg");
-  inputField.focus();
+
+  const transcript = await getVideoTranscript();
+
+  if (!transcript) {
+    disableInputField(inputField, "No transcript available!");
+  } else {
+    enableInputField(inputField, "Type your message…");
+    initMessages(transcript);
+    inputField.focus();
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
