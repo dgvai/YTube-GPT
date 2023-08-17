@@ -1,11 +1,26 @@
 .main-layout {
+  position: fixed;
+  right: 0;
+  width: 36rem;
+  z-index: 99999999999999;
+  border-radius: 10px;
+  box-shadow: 12px 0 58px black;
   display: flex;
+  bottom: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 48rem;
   color: #1f2937;
   background-color: #f3f4f6;
+  overflow: hidden;
+}
+
+.chatbox-header {
+  color: #333333;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 .chatbox-container {

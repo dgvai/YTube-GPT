@@ -1,21 +1,10 @@
 chrome.runtime.onInstalled.addListener(function () {
-  let currentTabId;
-  chrome.action.onClicked.addListener(function (tab) {
-    currentTabId = tab.id;
-    chrome.scripting
-      .executeScript({
-        target: { tabId: currentTabId },
-        files: ["src/chatbot.js"],
-      })
-      .then(() => console.log("YTube GPT is Ready!"));
-
-    chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo) {
-      if (tabId === currentTabId) {
-        if (changeInfo.url) {
-          await chrome.tabs.sendMessage(currentTabId, { urlChanged: true });
-        }
+  chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
+    if (tab.url.includes("youtube.com")) {
+      if (changeInfo.url) {
+        await chrome.tabs.sendMessage(tabId, { urlChanged: true });
       }
-    });
+    }
   });
 });
 

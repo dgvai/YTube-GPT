@@ -2,6 +2,9 @@ const API_SERVER = "http://localhost:3000";
 
 const template = `
 <main class="main-layout">
+  <div class="chatbox-header">
+    <bold>YTube GPT</bold>
+  </div>
   <div class="chatbox-container">
     <div id="ytube-gtp-chatbox" class="messages-container"></div>
     <div class="input-container">
@@ -87,7 +90,7 @@ const getVideoTranscript = async () => {
 };
 
 const insertTemplate = () => {
-  document.getElementById("secondary").insertAdjacentHTML("afterbegin", template);
+  document.body.insertAdjacentHTML("afterbegin", template);
   console.log("YTube GPT is Ready in Client!");
 };
 

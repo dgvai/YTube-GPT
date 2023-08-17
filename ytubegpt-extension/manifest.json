@@ -3,7 +3,7 @@
   "name": "YTube GPT",
   "description": "Your personal YouTube assistant",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting", "webRequest"],
+  "permissions": ["activeTab", "scripting", "webRequest", "tabs"],
   "host_permissions": ["*://localhost:*/*", "https://i.ibb.co/*"],
   "action": {},
   "background": {
@@ -13,7 +13,9 @@
   "content_scripts": [
     {
       "css": ["src/styles.css"],
-      "matches": ["https://*.youtube.com/watch*"]
+      "js": ["src/chatbot.js"],
+      "run_at": "document_end",
+      "matches": ["https://*.youtube.com/*"]
     }
   ],
   "icons": {
