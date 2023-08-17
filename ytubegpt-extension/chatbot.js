@@ -1,15 +1,12 @@
 const API_SERVER = "http://localhost:3000";
 
 const template = `
-<main class="flex flex-col items-center justify-center h-96 bg-gray-100 text-gray-800">
-  <div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
-    <div id="ytube-gtp-chatbox" class="flex flex-col flex-grow h-0 p-4 overflow-auto">
-
-    </div>
-
-    <div class="bg-gray-300 p-4">
+<main class="main-layout">
+  <div class="chatbox-container">
+    <div id="ytube-gtp-chatbox" class="messages-container"></div>
+    <div class="input-container">
       <form id="ytube-gpt-form">
-      <input id="ytube-gpt-msg" class="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…" />
+        <input id="ytube-gpt-msg" class="user-input" type="text" placeholder="Type your message…" />
       </form>
     </div>
   </div>
@@ -18,13 +15,12 @@ const template = `
 
 const makeBotText = (text) => {
   return `
-  <div class="flex w-full mt-2 space-x-3 max-w-xs">
-    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+  <div class="bot-text-container">
+    <div class="avatar"></div>
     <div>
-      <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-        <p class="text-sm">${text}</p>
+      <div class="bot-text-bg">
+        <p class="chat-text">${text}</p>
       </div>
-      <span class="text-xs text-gray-500 leading-none">2 min ago</span>
     </div>
   </div>
   `;
@@ -32,14 +28,13 @@ const makeBotText = (text) => {
 
 const makeUserText = (text) => {
   return `
-  <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+  <div class="user-text-container">
     <div>
-      <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-        <p class="text-sm">${text}</p>
+      <div class="user-text-bg">
+        <p class="chat-text">${text}</p>
       </div>
-      <span class="text-xs text-gray-500 leading-none">2 min ago</span>
     </div>
-    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+    <div class="avatar"></div>
   </div>
   `;
 };
