@@ -14,7 +14,7 @@ export class GptService {
 
   async getChatResponse(messages: ChatMessage[]) {
     const response = await this.openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-3.5-turbo-16k',
       messages,
       temperature: 1,
       max_tokens: 256,
