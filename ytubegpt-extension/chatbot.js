@@ -13,6 +13,8 @@ const template = `
 </main>
 `;
 
+const loader = `<div class="loader"><span></span><span></span><span></span></div>`;
+
 const makeBotText = (text) => {
   return `
   <div class="bot-text-container">
@@ -84,6 +86,14 @@ const insertTemplate = () => {
   document.getElementById("secondary").insertAdjacentHTML("afterbegin", template);
 };
 
+const triggerLoader = (show) => {
+  if (show) {
+    document.getElementById("ytube-gtp-chatbox").insertAdjacentHTML("afterend", loader);
+  } else {
+    document.querySelector(".loader").remove();
+  }
+};
+
 async function main() {
   const videoId = getVideoIdFromQuery();
   const transcript = await getVideoTranscript(videoId);
@@ -108,7 +118,7 @@ async function main() {
     });
     insertIntoChatbox(userText);
     inputField.value = "";
-
+    triggerLoader(true);
     const response = await fetchResource(`${API_SERVER}/gpt/chat`, {
       method: "POST",
       headers: {
@@ -120,6 +130,7 @@ async function main() {
     const reply = await response.json();
     const botText = makeBotText(reply.content);
     messages.push(reply);
+    triggerLoader(false);
     insertIntoChatbox(botText);
   });
 }
