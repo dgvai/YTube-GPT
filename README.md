@@ -30,21 +30,23 @@ const API_SERVER = "http://localhost:3000";
 ### 4. Place OpenAI API Key
 - navigate to the `ytubegpt-server` folder
 - Create an `.env` file in the server root dir, and copy the variables from `.env.example`
-
 - From your Open AI dashboard, copy the secret key and paste here.
 ```js
 OPENAI_API_KEY=<YOUR-KEY-HERE>
 ```
+> Is API key free? Ans: Yes, you can get a free API key from OpenAI. It is limited to 5$ as grant, which is enough for trying this project.
 
 ### 5. Run the Server
 - navigate to the `ytubegpt-server` folder
 - Run `yarn start:dev` or `npm run start:dev`
+- Make sure that the PORT is the same as the one you updated in `chatbot.js`
 
 ### 6. Usage
 - Go to any YouTube video and see if that video has a transcript
 - If it does, ask in the chat box and see the response!
+- If it does not, try another video!
 
-> why no all videos has transcript? Ans: YouTube does not provide transcripts for all videos. It depends on the uploader. It also varies by language, type of video, and other factors.
+> Why do not all videos have transcripts? Ans: YouTube does not provide transcripts for all videos. It depends on the uploader. It also varies by language, type of video, and other factors.
 
 ## Screenshots
 ![Screenshot 1](./docs/screenshot-full.png)
